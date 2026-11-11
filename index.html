@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+
+<html dir="ltr" lang="fr">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>📋 PDCA Collect - Gestion Agricole</title>
+<link href="style.css" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+</head>
+<body>
+<div class="container">
+<!-- En-tête -->
+<header class="header">
+<h1><i class="fas fa-clipboard-check"></i><span data-i18n="PDCA Collect"> PDCA Collect</span></h1>
+<p class="subtitle"><span data-i18n="Système de collecte des données agricoles">Système de collecte des données agricoles</span></p>
+<div class="language-switch"><span data-i18n="Langue">Langue</span><select aria-label="Choisir la langue" id="languageSelect"><option value="fr">Français</option><option value="ar">العربية</option></select></div></header>
+<!-- Sélection du type -->
+<section class="type-section">
+<div class="type-selector">
+<button class="type-btn type-active" id="btnAgriculteur">
+<i class="fas fa-user"></i><span data-i18n="Agriculteurs"> Agriculteurs
+                </span></button>
+<button class="type-btn" id="btnCooperative">
+<i class="fas fa-users"></i><span data-i18n="Coopératives"> Coopératives
+                </span></button>
+</div>
+</section>
+<!-- Formulaire Agriculteur -->
+<section class="form-section active-form" id="formAgriculteur">
+<h2><i class="fas fa-edit"></i><span data-i18n="Formulaire d'inscription - Agriculteurs"> Formulaire d'inscription - Agriculteurs</span></h2>
+<form id="agriculteurForm">
+<div class="form-grid">
+<!-- Colonne 1 -->
+<div class="form-column">
+<div class="form-group">
+<label for="nom"><span data-i18n="Nom *">Nom *</span></label>
+<input data-i18n-placeholder="Ex: Benmohammed" id="nom" placeholder="Ex: Benmohammed" required="" type="text"/>
+</div>
+<div class="form-group">
+<label for="prenom"><span data-i18n="Prénom *">Prénom *</span></label>
+<input data-i18n-placeholder="Ex: Mina" id="prenom" placeholder="Ex: Mina" required="" type="text"/>
+</div>
+<div class="form-group">
+<label for="cin"><span data-i18n="CIN *">CIN *</span></label>
+<input data-i18n-placeholder="Ex: AB0099" id="cin" placeholder="Ex: AB0099" required="" type="text"/>
+</div>
+<div class="form-group">
+<label><span data-i18n="Genre *">Genre *</span></label>
+<div class="radio-group">
+<label class="radio-label">
+<input checked="" name="genre" type="radio" value="m"/>
+<span class="radio-custom"></span><span data-i18n="Homme (m)">
+                                    Homme (m)
+                                </span></label>
+<label class="radio-label">
+<input name="genre" type="radio" value="f"/>
+<span class="radio-custom"></span><span data-i18n="Femme (f)">
+                                    Femme (f)
+                                </span></label>
+</div>
+</div>
+<div class="form-group">
+<label for="date_naissance"><span data-i18n="Date de naissance *">Date de naissance *</span></label>
+<input data-i18n-placeholder="JJ/MM/AAAA (Ex: 03/09/1980)" id="date_naissance" placeholder="JJ/MM/AAAA (Ex: 03/09/1980)" required="" type="text"/>
+</div>
+</div>
+<!-- Colonne 2 -->
+<div class="form-column">
+<div class="form-group">
+<label for="adresse"><span data-i18n="Adresse">Adresse</span></label>
+<input data-i18n-placeholder="Adresse complète" id="adresse" placeholder="Adresse complète" type="text"/>
+</div>
+<div class="form-group">
+<label for="telephone"><span data-i18n="Téléphone *">Téléphone *</span></label>
+<input data-i18n-placeholder="Ex: 600000000" id="telephone" placeholder="Ex: 600000000" required="" type="tel"/>
+</div>
+<div class="form-group geo-group">
+<label><span data-i18n="Coordonnées GPS">Coordonnées GPS (X = longitude, Y = latitude)</span></label>
+<div class="coords-group">
+<div class="coord-input"><label for="x"><span data-i18n="X – Longitude">X – Longitude</span></label><input id="x" inputmode="decimal" placeholder="Ex: -7.5898" type="text"/></div>
+<div class="coord-input"><label for="y"><span data-i18n="Y – Latitude">Y – Latitude</span></label><input id="y" inputmode="decimal" placeholder="Ex: 33.5731" type="text"/></div>
+</div>
+<div class="geo-actions"><button class="btn btn-primary geo-btn" id="btnGpsAgri" type="button"><i class="fas fa-location-crosshairs"></i> <span data-i18n="Obtenir ma position GPS">Obtenir ma position GPS</span></button><button class="btn btn-secondary geo-btn" id="btnMapAgri" type="button"><i class="fas fa-map-marked-alt"></i> <span data-i18n="Voir sur Google Maps">Voir sur Google Maps</span></button></div>
+<p class="geo-help" id="geoStatusAgri"><span data-i18n="Avec ou sans Internet : saisissez X et Y manuellement si nécessaire.">Avec ou sans Internet : saisissez X et Y manuellement si nécessaire.</span></p>
+</div>
+<div class="form-group">
+<label for="commune_id"><span data-i18n="ID Commune *">ID Commune *</span></label>
+<input data-i18n-placeholder="Ex: 302" id="commune_id" placeholder="Ex: 302" required="" type="text"/>
+</div>
+<div class="form-group">
+<label for="douar"><span data-i18n="Douar *">Douar *</span></label>
+<input data-i18n-placeholder="Ex: Douar principal" id="douar" placeholder="Ex: Douar principal" required="" type="text"/>
+</div>
+</div>
+</div>
+<!-- Boutons Agriculteur -->
+<div class="form-buttons">
+<button class="btn btn-primary" id="btnAjouterAgriculteur" type="button">
+<i class="fas fa-plus"></i><span data-i18n="Ajouter Agriculteur"> Ajouter Agriculteur
+                    </span></button>
+<button class="btn btn-secondary" id="btnExporterCSVAgriculteur" type="button">
+<i class="fas fa-file-csv"></i><span data-i18n="Exporter CSV Agriculteurs"> Exporter CSV Agriculteurs
+                    </span></button>
+<button class="btn btn-secondary" id="btnExporterWordAgriculteur" style="background-color: #2b5797;" type="button">
+<i class="fas fa-file-word"></i><span data-i18n="Exporter Word Agriculteurs"> Exporter Word Agriculteurs
+                    </span></button>
+<button class="btn btn-secondary" id="btnExporterPDFAgriculteur" style="background-color: #f40f02;" type="button">
+<i class="fas fa-file-pdf"></i><span data-i18n="Exporter PDF Agriculteurs"> Exporter PDF Agriculteurs
+                    </span></button>
+<button class="btn btn-danger" id="btnEffacerAgriculteur" type="button">
+<i class="fas fa-trash"></i><span data-i18n="Effacer Formulaire"> Effacer Formulaire
+                    </span></button>
+</div>
+</form>
+</section>
+<!-- Formulaire Coopérative -->
+<section class="form-section" id="formCooperative">
+<h2><i class="fas fa-edit"></i><span data-i18n="Formulaire d'inscription - Coopératives"> Formulaire d'inscription - Coopératives</span></h2>
+<form id="cooperativeForm">
+<div class="form-grid">
+<!-- Colonne 1 -->
+<div class="form-column">
+<div class="form-group">
+<label for="nom_cooperative"><span data-i18n="Nom Coopérative *">Nom Coopérative *</span></label>
+<input data-i18n-placeholder="Ex: Coopérative Test" id="nom_cooperative" placeholder="Ex: Coopérative Test" required="" type="text"/>
+</div>
+<div class="form-group">
+<label for="nom_president"><span data-i18n="Nom Président *">Nom Président *</span></label>
+<input data-i18n-placeholder="Ex: Président Coopérative" id="nom_president" placeholder="Ex: Président Coopérative" required="" type="text"/>
+</div>
+<div class="form-group">
+<label for="nombre_adherents"><span data-i18n="Nombre d'adhérents *">Nombre d'adhérents *</span></label>
+<input data-i18n-placeholder="Ex: 34" id="nombre_adherents" placeholder="Ex: 34" required="" type="number"/>
+</div>
+<div class="form-group">
+<label for="dateCreation"><span data-i18n="Date de création *">Date de création *</span></label>
+<input data-i18n-placeholder="JJ/MM/AAAA (Ex: 03/09/1980)" id="dateCreation" placeholder="JJ/MM/AAAA (Ex: 03/09/1980)" required="" type="text"/>
+</div>
+<div class="form-group">
+<label for="fax_cooperative"><span data-i18n="Fax Coopérative">Fax Coopérative</span></label>
+<input data-i18n-placeholder="Ex: 6554323345" id="fax_cooperative" placeholder="Ex: 6554323345" type="text"/>
+</div>
+</div>
+<!-- Colonne 2 -->
+<div class="form-column">
+<div class="form-group">
+<label for="tel_president"><span data-i18n="Téléphone Président *">Téléphone Président *</span></label>
+<input data-i18n-placeholder="Ex: 655443345" id="tel_president" placeholder="Ex: 655443345" required="" type="text"/>
+</div>
+<div class="form-group">
+<label for="fonctionnelle"><span data-i18n="Fonctionnelle *">Fonctionnelle *</span></label>
+<select id="fonctionnelle" required="">
+<option value="OUI"><span data-i18n="OUI">OUI</span></option>
+<option value="NON"><span data-i18n="NON">NON</span></option>
+</select>
+</div>
+<div class="form-group">
+<label for="conformite_loi_112_12"><span data-i18n="Conformité Loi 112-12 *">Conformité Loi 112-12 *</span></label>
+<select id="conformite_loi_112_12" required="">
+<option value="OUI"><span data-i18n="OUI">OUI</span></option>
+<option value="NON"><span data-i18n="NON">NON</span></option>
+</select>
+</div>
+<div class="form-group">
+<label for="commune_id_coop"><span data-i18n="ID Commune *">ID Commune *</span></label>
+<input data-i18n-placeholder="Ex: 303" id="commune_id_coop" placeholder="Ex: 303" required="" type="text"/>
+</div>
+<div class="form-group">
+<label><span data-i18n="Genre *">Genre *</span></label>
+<div class="radio-group">
+<label class="radio-label">
+<input checked="" name="genre_coop" type="radio" value="m"/>
+<span class="radio-custom"></span><span data-i18n="Homme (m)">
+                                    Homme (m)
+                                </span></label>
+<label class="radio-label">
+<input name="genre_coop" type="radio" value="f"/>
+<span class="radio-custom"></span><span data-i18n="Femme (f)">
+                                    Femme (f)
+                                </span></label>
+</div>
+</div>
+<div class="form-group">
+<label for="filiere"><span data-i18n="Filière *">Filière *</span></label>
+<input data-i18n-placeholder="Ex: 15" id="filiere" placeholder="Ex: 15" required="" type="text"/>
+</div>
+<div class="form-group geo-group">
+<label>Coordonnées GPS (X = longitude, Y = latitude)</label>
+<div class="coords-group">
+<div class="coord-input"><label for="x_coop"><span data-i18n="X – Longitude">X – Longitude</span></label><input id="x_coop" inputmode="decimal" placeholder="Ex: -7.5898" type="text"/></div>
+<div class="coord-input"><label for="y_coop"><span data-i18n="Y – Latitude">Y – Latitude</span></label><input id="y_coop" inputmode="decimal" placeholder="Ex: 33.5731" type="text"/></div>
+</div>
+<div class="geo-actions"><button class="btn btn-primary geo-btn" id="btnGpsCoop" type="button"><i class="fas fa-location-crosshairs"></i> <span data-i18n="Obtenir ma position GPS">Obtenir ma position GPS</span></button><button class="btn btn-secondary geo-btn" id="btnMapCoop" type="button"><i class="fas fa-map-marked-alt"></i> <span data-i18n="Voir sur Google Maps">Voir sur Google Maps</span></button></div>
+<p class="geo-help" id="geoStatusCoop"><span data-i18n="Avec ou sans Internet : saisissez X et Y manuellement si nécessaire.">Avec ou sans Internet : saisissez X et Y manuellement si nécessaire.</span></p>
+</div>
+</div>
+</div>
+<!-- Boutons Coopérative -->
+<div class="form-buttons">
+<button class="btn btn-primary" id="btnAjouterCooperative" type="button">
+<i class="fas fa-plus"></i><span data-i18n="Ajouter Coopérative"> Ajouter Coopérative
+                    </span></button>
+<button class="btn btn-secondary" id="btnExporterCSVCooperative" type="button">
+<i class="fas fa-file-csv"></i><span data-i18n="Exporter CSV Coopératives"> Exporter CSV Coopératives
+                    </span></button>
+<button class="btn btn-secondary" id="btnExporterWordCooperative" style="background-color: #2b5797;" type="button">
+<i class="fas fa-file-word"></i><span data-i18n="Exporter Word Coopératives"> Exporter Word Coopératives
+                    </span></button>
+<button class="btn btn-secondary" id="btnExporterPDFCooperative" style="background-color: #f40f02;" type="button">
+<i class="fas fa-file-pdf"></i><span data-i18n="Exporter PDF Coopératives"> Exporter PDF Coopératives
+                    </span></button>
+<button class="btn btn-danger" id="btnEffacerCooperative" type="button">
+<i class="fas fa-trash"></i><span data-i18n="Effacer Formulaire"> Effacer Formulaire
+                    </span></button>
+</div>
+</form>
+</section>
+<!-- Liste des agriculteurs -->
+<section class="list-section active-list" id="listAgriculteur">
+<h2><i class="fas fa-list"></i><span data-i18n="Agriculteurs Saisis ("> Agriculteurs Saisis (</span><span id="countAgriculteurs">0</span><span data-i18n=")">)</span></h2>
+<div class="table-filters"><input data-i18n-placeholder="Rechercher dans les agriculteurs..." id="agriSearch" placeholder="ابحث في لائحة الفلاحين..." type="search"/><input data-i18n-placeholder="Toutes les communes" id="agriCommune" placeholder="كل الجماعات" type="search"/><select id="agriFilter"><option data-i18n="Tous les genres" value="all">Tous les genres</option><option data-i18n="Homme" value="m">Homme</option><option data-i18n="Femme" value="f">Femme</option></select></div><div class="table-container">
+<table id="agriculteursTable">
+<thead>
+<tr>
+<th><span data-i18n="Nom">Nom</span></th>
+<th><span data-i18n="Prénom">Prénom</span></th>
+<th><span data-i18n="CIN">CIN</span></th>
+<th><span data-i18n="Genre">Genre</span></th>
+<th><span data-i18n="Date Naiss.">Date Naiss.</span></th>
+<th><span data-i18n="Téléphone">Téléphone</span></th>
+<th><span data-i18n="Commune">Commune</span></th>
+<th><span data-i18n="Douar">Douar</span></th>
+<th><span data-i18n="Actions">Actions</span></th>
+</tr>
+</thead>
+<tbody id="tableBodyAgriculteurs">
+<!-- Les lignes seront ajoutées ici par JavaScript -->
+</tbody>
+</table>
+</div>
+<div class="table-info">
+<p id="tableMessageAgriculteurs">Aucun agriculteur saisi pour le moment.</p>
+</div>
+</section>
+<!-- Liste des coopératives -->
+<section class="list-section" id="listCooperative">
+<h2><i class="fas fa-list"></i><span data-i18n="Coopératives Saisies ("> Coopératives Saisies (</span><span id="countCooperatives">0</span><span data-i18n=")">)</span></h2>
+<div class="table-filters"><input data-i18n-placeholder="Rechercher dans les coopératives..." id="coopSearch" placeholder="ابحث في لائحة التعاونيات..." type="search"/><input data-i18n-placeholder="Toutes les communes" id="coopCommune" placeholder="كل الجماعات" type="search"/><select id="coopFilter"><option data-i18n="Toutes" value="all">Toutes</option><option data-i18n="Oui" value="yes">Oui</option><option data-i18n="Non" value="no">Non</option></select></div><div class="table-container">
+<table id="cooperativesTable">
+<thead>
+<tr>
+<th><span data-i18n="Nom Coopérative">Nom Coopérative</span></th>
+<th><span data-i18n="Nom Président">Nom Président</span></th>
+<th><span data-i18n="Nbr Adhérents">Nbr Adhérents</span></th>
+<th><span data-i18n="Date Création">Date Création</span></th>
+<th><span data-i18n="Fax">Fax</span></th>
+<th><span data-i18n="Tél Président">Tél Président</span></th>
+<th><span data-i18n="Fonctionnelle">Fonctionnelle</span></th>
+<th><span data-i18n="Conformité Loi">Conformité Loi</span></th>
+<th><span data-i18n="Commune ID">Commune ID</span></th>
+<th><span data-i18n="Genre">Genre</span></th>
+<th><span data-i18n="Filière">Filière</span></th>
+<th><span data-i18n="Actions">Actions</span></th>
+</tr>
+</thead>
+<tbody id="tableBodyCooperatives">
+<!-- Les lignes seront ajoutées ici par JavaScript -->
+</tbody>
+</table>
+</div>
+<div class="table-info">
+<p id="tableMessageCooperatives">Aucune coopérative saisie pour le moment.</p>
+</div>
+</section>
+<!-- Statut et informations -->
+<footer class="footer">
+<div class="status-bar">
+<p id="statusMessage">
+<i class="fas fa-info-circle"></i> PDCA Collect - Prêt à saisir des données
+                </p>
+</div>
+<div class="instructions">
+<p><i class="fas fa-lightbulb"></i><span data-i18n="Sélectionnez le type (Agriculteur/Coopérative) et exportez les données en CSV, Word ou PDF."> Sélectionnez le type (Agriculteur/Coopérative) et exportez les données en CSV, Word ou PDF.</span></p>
+</div>
+</footer>
+</div>
+<!-- Modale pour les messages -->
+<div class="modal" id="messageModal">
+<div class="modal-content">
+<h3 id="modalTitle"></h3>
+<p id="modalMessage"></p>
+<button class="btn btn-primary" id="modalClose"><span data-i18n="OK">OK</span></button>
+</div>
+</div>
+<!-- Bibliothèques pour l'export -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
+<script src="https://unpkg.com/docx@7.7.0/build/index.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
